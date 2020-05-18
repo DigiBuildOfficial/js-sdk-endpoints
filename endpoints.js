@@ -8,7 +8,7 @@ const S = require('string');
 const Handlebars = require('handlebars');
 
 const ENDOINTS_URL ='http://procore-api-documentation-staging.s3-website-us-east-1.amazonaws.com';
-
+console.log("firing")
 const notEmpty = R.compose(
   R.not,
   R.isEmpty
