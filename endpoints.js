@@ -105,6 +105,7 @@ const endpointCommand = (to, { destination, index }) => {
         groups.map(({ name }) => {
           const endpointName = name.toLowerCase()
 
+          /* @todo - add a CLI flag that allows for camel-cased endpoint file names. Write out code here.*/
           const alreadySnakeCase = /^[a-z_]*$/.test(endpointName);
 
           const gelatoGroup = alreadySnakeCase ?
@@ -147,6 +148,7 @@ const endpointCommand = (to, { destination, index }) => {
                     if (err) throw err;
 
                     fs.appendFileSync(libIndexPath, `export { default as ${camelizedEndpointName} } from './${destination}/${gelatoGroup}'\n`)
+                    fs.appendFileSync(libIndexPath, 1)
 
                     bar.tick();
                 });
