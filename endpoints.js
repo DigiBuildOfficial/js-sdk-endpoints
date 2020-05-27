@@ -9,7 +9,7 @@ const Handlebars = require("handlebars");
 
 const ENDOINTS_URL =
   "http://procore-api-documentation-staging.s3-website-us-east-1.amazonaws.com";
-console.log("firing");
+
 const notEmpty = R.compose(R.not, R.isEmpty);
 
 const endpointTemplatePath = path.join(__dirname, "endpoint.template");
@@ -43,6 +43,17 @@ Handlebars.registerHelper(
 Handlebars.registerHelper(
   "args",
   R.ifElse(R.isEmpty, R.identity, R.compose(R.join(", "), R.pluck("name")))
+);
+
+const addQuotesAroundString = (name) => `"${name}"`;
+
+Handlebars.registerHelper(
+  "inputs",
+  R.ifElse(
+    R.isEmpty,
+    R.identity,
+    R.compose(R.join(", "), R.map(addQuotesAroundString), R.pluck("name"))
+  )
 );
 
 const isProductionGroup = R.compose(

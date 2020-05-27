@@ -1,10 +1,12 @@
+import { EndpointConfig } from "@digibuildofficial/js-sdk/dist/client"
+
 interface {{ interfaceName }} {
   action: string;
   qs?: any;
   {{ interface definitions }}
 }
 
-function {{name}}({ action, qs, {{ args params }} }: {{ interfaceName }}): any {
+function {{name}}({ action, qs, {{ args params }} }: {{ interfaceName }}): EndpointConfig {
   return {
     base: '{{path}}',
     action,
@@ -13,4 +15,6 @@ function {{name}}({ action, qs, {{ args params }} }: {{ interfaceName }}): any {
   }
 }
 
-export default { "{{ name }}": {{ name }} }
+
+
+export default {  "name": "{{ name }}", "handler": {{ name }}, "inputs": [ {{{ inputs params }}} ]}
